@@ -1,9 +1,7 @@
-FROM ubuntu:12.10
+FROM ubuntu:14.04
 
 RUN echo "Asia/Tokyo" > /etc/timezone
 RUN dpkg-reconfigure -f noninteractive tzdata
-
-RUN sed -i -e 's/archive.ubuntu.com\|security.ubuntu.com/old-releases.ubuntu.com/g' /etc/apt/sources.list
 
 RUN apt-get -y update
 RUN apt-get -y upgrade
