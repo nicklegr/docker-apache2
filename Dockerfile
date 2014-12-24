@@ -19,6 +19,7 @@ RUN useradd --uid 1000 --gid 50 apache
 RUN sed -i -e 's/APACHE_RUN_USER=www-data/APACHE_RUN_USER=apache/g' /etc/apache2/envvars
 RUN sed -i -e 's/APACHE_RUN_GROUP=www-data/APACHE_RUN_GROUP=staff/g' /etc/apache2/envvars
 
+RUN ln -s /etc/apache2/mods-available/cgi.load /etc/apache2/mods-enabled/cgi.load
 RUN ln -s /etc/apache2/mods-available/auth_digest.load /etc/apache2/mods-enabled/auth_digest.load
 
 ADD sites-000-default.conf /etc/apache2/sites-available/000-default.conf
