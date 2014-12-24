@@ -23,21 +23,14 @@ ENV APACHE_RUN_GROUP www-data
 RUN ln -s /etc/apache2/mods-available/userdir.load /etc/apache2/mods-enabled/userdir.load
 RUN ln -s /etc/apache2/mods-available/userdir.conf /etc/apache2/mods-enabled/userdir.conf
 RUN ln -s /etc/apache2/mods-available/auth_digest.load /etc/apache2/mods-enabled/auth_digest.load
-RUN echo 'AddHandler cgi-script .cgi' >> /etc/apache2/apache2.conf
 
 RUN sed -i -e 's/Options/Options ExecCGI/' /etc/apache2/mods-enabled/userdir.conf
 
-ADD apache2.conf /etc/apache2/conf.d/
+ADD sites-default /etc/apache2/conf.d/sites-available/default
 
 RUN mkdir /var/run/apache2
 
-ADD pyukiwiki-0.1.6-devel.tar.gz /var/www
-RUN mv /var/www/pyukiwiki-0.1.6-devel /var/www/wiki
-RUN echo 'Options ExecCGI' >> /var/www/wiki/.htaccess
-
-RUN chown -R www-data:www-data /var/www/wiki
-
-RUN ls -l /var/www/wiki
+VOLUME /var/www
 
 EXPOSE 80
 

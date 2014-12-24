@@ -7,8 +7,9 @@
                 AllowOverride None
         </Directory>
         <Directory /var/www/>
-                Options Indexes FollowSymLinks MultiViews
-                AllowOverride None
+                Options Indexes FollowSymLinks MultiViews ExecCGI
+                AddHandler cgi-script .cgi
+                AllowOverride All
                 Order allow,deny
                 allow from all
         </Directory>
