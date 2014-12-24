@@ -21,7 +21,7 @@ RUN sed -i -e 's/APACHE_RUN_GROUP=www-data/APACHE_RUN_GROUP=staff/g' /etc/apache
 
 RUN ln -s /etc/apache2/mods-available/auth_digest.load /etc/apache2/mods-enabled/auth_digest.load
 
-ADD sites-default /etc/apache2/conf.d/sites-available/default
+ADD sites-000-default.conf /etc/apache2/sites-available/000-default.conf
 
 RUN mkdir /var/run/apache2
 
