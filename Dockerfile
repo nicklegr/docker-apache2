@@ -19,9 +19,6 @@ RUN apt-get -y install apache2
 
 ENV APACHE_RUN_USER www-data
 ENV APACHE_RUN_GROUP www-data
-# ENV APACHE_LOG_DIR /var/log/apache2
-ENV APACHE_LOG_DIR /log
-
 
 RUN ln -s /etc/apache2/mods-available/userdir.load /etc/apache2/mods-enabled/userdir.load
 RUN ln -s /etc/apache2/mods-available/userdir.conf /etc/apache2/mods-enabled/userdir.conf
@@ -43,10 +40,12 @@ RUN chown -R www-data:www-data /var/www/wiki
 RUN ls -l /var/www/wiki
 
 EXPOSE 80
-VOLUME /log
 
 # RUN cat /etc/apache2/apache2.conf # | grep Options
 RUN cat /etc/apache2/mods-enabled/userdir.conf
 
+ADD run.sh /tmp/run.sh
+RUN chmod 755 /tmp/run.sh
+
 # CMD service apache2 start
-CMD ["/usr/sbin/apache2ctl", "-D", "FOREGROUND"]
+CMD ["/tmp/run.sh"]
